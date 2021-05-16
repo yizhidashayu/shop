@@ -1,11 +1,10 @@
 <template>
 <div class="login-wrap">
-    <el-form 
-    :rules="rules"
+    <el-form
     ref="formdata"
     class="login-form"
-    label-position="top" 
-    label-width="80px" 
+    label-position="top"
+    label-width="80px"
     :model="formdata">
     <h2>用户登录</h2>
     <el-form-item label="用户名" prop="username">
@@ -21,37 +20,37 @@
 
 <script>
 export default {
-  data(){
-    return{
-      //登录表单的用户绑定 
-      formdata:{
-        username:'',
-        password:''
-      },
-    
+  data () {
+    return {
+      // 登录表单的用户绑定
+      formdata: {
+        username: '',
+        password: ''
+      }
+
     }
   },
-  methods:{
-    handleLogin(){
-      this.$http.post('login',this.formdata).then((res)=>{
-        const{
-          data,meta:{msg,status}
-        }=res.data
-        if (status==200) {
-          //保存token
-          localStorage.setItem('token',data.token)
-          //登录成功跳转到home
-          this.$router.push({name:'home'})
-          //提示成功
-         this.$message.success(msg);
-        }else{
-          //提示失败
-           this.$message.error(msg)
+  methods: {
+    handleLogin () {
+      this.$http.post('login', this.formdata).then((res) => {
+        const {
+          data, meta: {msg, status}
+        } = res.data
+        if (status == 200) {
+          // 保存token
+          localStorage.setItem('token', data.token)
+          // 登录成功跳转到home
+          this.$router.push({name: 'home'})
+          // 提示成功
+          this.$message.success(msg)
+        } else {
+          // 提示失败
+          this.$message.error(msg)
         }
       })
     }
   }
- }
+}
 </script>
 
 <style>
